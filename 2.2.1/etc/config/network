@@ -1,0 +1,120 @@
+
+config interface 'loopback'
+	option ifname 'lo'
+	option proto 'static'
+	option ipaddr '127.0.0.1'
+	option netmask '255.0.0.0'
+
+config globals 'globals'
+	option default_ps '0'
+	option ula_prefix 'none'
+
+# Le lan interne, classique
+config interface 'lan'
+	option type 'bridge'
+	option proto 'static'
+	option ipaddr '192.168.1.1'
+	option netmask '255.255.255.0'
+	option ip6assign '64'                     # pour etre sur de recuperer un /64 sur le lan
+	option delegate '0'
+	option force_link '0'
+	option mtu '1500'
+	option ifname 'eth0 eth1 eth2 eth3 eth5'
+	option ipv6 '1'
+
+# le switch
+config switch 'bcmsw'
+	option reset '1'
+	option enable_vlan '0'
+	option qosimppauseenable '0'
+	option jumbo '1'              # si on veut pouvoir jouer avec les jumbo frames
+
+# le wifi 2.4GHz public
+config interface 'wlnet_b_24'
+	option proto 'static'
+	option ip6assign '64'
+	option ipv6 '1'
+	option ip6hint '1'
+	option netmask '255.255.255.128'
+	option ipaddr '192.168.168.1'
+	option ifname 'wl0_1'
+	option force_link '0'
+	option name 'Ospiti-TIM-24246301'
+
+# le wifi 5GHz public
+config interface 'wlnet_b_5'
+	option proto 'static'
+	option ip6assign '64'
+	option ipv6 '1'
+	option ip6hint '2'
+	option netmask '255.255.255.128'
+	option ipaddr '192.168.168.129'
+	option ifname 'wl1_1'
+	option force_link '0'
+	option name 'Ospiti-TIM-24246301'
+
+# le wifi (2.4GHz et 5GHz) prive
+config device 'wlnet_b_5eth5'
+	option type '8021q'
+	option name 'wl1_1'
+	option enabled '1'
+	option ifname 'eth5'
+	option vid '3'
+	option ipv6 '1'
+
+# je ne sais pas trop a quoi celui ci correspond
+config interface 'public_lan'
+	option ifname '@lan'
+	option proto 'static'
+	option ipaddr '0.0.0.0'
+	option netmask '0.0.0.0'
+	option auto '1'
+	option disabled_info 'proto=static,ip=0.0.0.0,mask=255.255.255.248'
+
+# port wan (port route)
+config device 'waneth4'
+	option type '8021q'
+	option name 'waneth4'
+	option ifname 'eth4'
+	option vid '835'
+	option ipv6 '0'
+
+# port ADSL (interface ptm0)
+config device 'wanptm0'
+	option type '8021q'
+	option name 'wanptm0'
+	option ifname 'ptm0'
+	option vid '832'                   # VLAN orange
+	option ipv6 '1'                    # bien penser a l'activer
+	option mtu '1500'
+
+config interface 'wan'
+	option ifname 'ptm0.832'           # ptm0 pour l'adsl (eth4 pour le wan sur port route) et le vlan d'orange
+	option proto 'dhcp'
+	option peerdns '1'
+	option broadcast '1'
+	option vendorid 'sagem'
+	option reqopts '1 15 28 51 58 59 90'
+	option sendopts '77:2b46535644534c5f6c697665626f782e496e7465726e65742e736f66746174686f6d652e4c697665626f7834 90:00000000000000000000001a0900000558010341010df%%%%%%%%%%'
+	option mtu '1500'
+	option auto '1'
+	option ipv6 '1'                    # il faut bien activer ipv6 sur le wan meme si l'ipv6 se fera sur wan6
+                                       # sinon ca désactive ipv6 sur l'interface ptm0.832 via net.ipv6.conf.ptm0.832.disable_ipv6=1
+
+config config 'config'
+	option wan_mode 'dhcp'             # pas sur que ce soit indispensable, au cas ou
+
+config interface 'wan6'
+	option ifname '@wan'
+	option proto 'dhcpv6'
+	option reqprefix 'auto'
+	option reqaddress 'none'
+	option defaultreqopts '0'
+	option reqopts '11 17 23 24'
+	option userclass 'FSVDSL_livebox.Internet.softathome.livebox4'
+	option vendorclass '0000040e0005736167656d'
+	option sendopts '11:00000000000000000000001a0900000558010341010d%%%%%%%%%%'
+	option noclientfqdn '1'            # pris en compte avec le fichier /lib/netifd/proto/dhcpv6.sh patche
+	option noacceptreconfig '1'        # pris en compte avec le fichier /lib/netifd/proto/dhcpv6.sh patche
+	option iface_dslite '0'            # desactiver ds-lite car on est en ipv6 natif
+	option iface_464xlat '0'           # desactiver translation ipv4/65 car on est en ipv6 natif

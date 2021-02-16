@@ -1,0 +1,10 @@
+# Put your custom commands here that should be executed once
+# the system init finished. By default this file does nothing.
+
+for i in 0 1 2 3 4 5 6 7; do
+	ip link set ptm0.832 type vlan egress $i:$i >/dev/null
+done
+ip link set ptm0.832 type vlan egress 1:0 >/dev/null
+ip link set ptm0.832 type vlan egress 0:6 >/dev/null
+
+exit 0
