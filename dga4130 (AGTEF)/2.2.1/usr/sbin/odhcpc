@@ -1,0 +1,2 @@
+#!/bin/sh
+exec chroot /chroot-1.0.3 /usr/sbin/odhcpc "$@"

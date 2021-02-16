@@ -1,0 +1,4 @@
+/var                /chroot-1.0.3/var                none  bind     0  0
+/lib/netifd         /chroot-1.0.3/lib/netifd         none  bind,ro  0  0
+/usr/share/libubox  /chroot-1.0.3/usr/share/libubox  none  bind,ro  0  0
+/lib/functions.sh   /chroot-1.0.3/lib/functions.sh   none  bind,ro  0  0
