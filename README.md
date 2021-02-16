@@ -9,7 +9,7 @@ en en travers sur ce site très bien fait (en anglais): https://hack-technicolor
 Note: après la mise à jour, penser à faire un reboot supplémentaire pour s'assurer que le fichier `/etc/rc.local`
 est vide (ou presque, à quelques commentaires prêt).
 
-il faut prendre les version correspondant à votre version (à ce jour il n'y a que la version 2.2.1) et vous
+il faut prendre les fichiers correspondant à votre version (à ce jour il n'y a que la version 2.2.1) et vous
 trouverez dans le répertoire correspondant une arborescence à copier sur le dga.
 
 Une fois le modem rooté et que vous êtes connecté dessus il faut copier les fichiers suivants:
