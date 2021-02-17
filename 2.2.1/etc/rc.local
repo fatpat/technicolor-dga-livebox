@@ -1,6 +1,11 @@
 # Put your custom commands here that should be executed once
 # the system init finished. By default this file does nothing.
+#
 
+# patch /usr/sbin/odhcpc to allow option 90
+/bin/patch-odhcpc.lua
+
+# create egress queue on dsl interface (on vlan 832)
 for i in 0 1 2 3 4 5 6 7; do
 	ip link set ptm0.832 type vlan egress $i:$i >/dev/null
 done
