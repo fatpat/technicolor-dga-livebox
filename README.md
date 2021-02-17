@@ -30,6 +30,11 @@ suivante sur le dga:
 dga# sed s/%%%%%%%%%%/`fti.lua fti/abcdefg`/ /etc/config/network
 ```
 
+Enfin, il faut patcher le binaire odhcpc par la commande
+```
+/bin/patch-odhcpc.lua
+```
+
 il ne reste plus qu'à rebooter le modem et constater l'ipv4 et l'ipv6 montée sur le dga:
 ```
 ifstatus wan
