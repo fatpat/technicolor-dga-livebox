@@ -148,8 +148,6 @@ config interface 'wan6'
 	option userclass 'FSVDSL_livebox.Internet.softathome.livebox4'
 	option vendorclass '0000040e0005736167656d'
 	option sendopts '11:00000000000000000000001a0900000558010341010d%%%%%%%%%%'
-	option noclientfqdn '1'            # pris en compte avec le fichier /lib/netifd/proto/dhcpv6.sh patche
-	option noacceptreconfig '1'        # pris en compte avec le fichier /lib/netifd/proto/dhcpv6.sh patche
 	option iface_dslite '0'            # desactiver ds-lite car on est en ipv6 natif
 	option iface_464xlat '0'           # desactiver translation ipv4/65 car on est en ipv6 natif
 ```
