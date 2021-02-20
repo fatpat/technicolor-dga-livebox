@@ -95,7 +95,7 @@ config interface 'wan'
 	option broadcast '1'
 	option vendorid 'sagem'
 	option reqopts '1 15 28 51 58 59 90'
-	option sendopts '77:2b46535644534c5f6c697665626f782e496e7465726e65742e736f66746174686f6d652e4c697665626f7834 90:00000000000000000000001a0900000558010341010df%%%%%%%%%%'
+	option sendopts '77:2b46535644534c5f6c697665626f782e496e7465726e65742e736f66746174686f6d652e4c697665626f7834 90:00000000000000000000001a0900000558010341010d%%%%%%%%%%'
 	option mtu '1500'
 	option auto '1'
 	option ipv6 '1'                    # il faut bien activer ipv6 sur le wan meme si l'ipv6 se fera sur wan6

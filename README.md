@@ -29,7 +29,7 @@ linux# tar -czpf - --strip 1 --owner 0 --group 0 2.2.1 | ssh root@192.168.1.1 ta
 Ensuite il ne reste plus qu'à mettre votre fti encodé dans le fichier `/etc/config/network` par la commande
 suivante sur le dga:
 ```
-dga# sed s/%%%%%%%%%%/`fti.lua fti/abcdefg`/ /etc/config/network
+dga# sed -i s/%%%%%%%%%%/`fti.lua fti/abcdefg`/ /etc/config/network
 ```
 
 Enfin, il faut patcher le binaire odhcpc par la commande
@@ -98,7 +98,7 @@ C'est le fichier brut, qui contient la configuration complète du modem. Il est 
 Dedans il faut intégrer votre identifiant orange en hexadécimale en remplaçant à 2 endroits la suite de caractères
 `%%%%%%%%%%` par la valeur renvoyée par le script `/bin/fti.lua`. La commande suivante permet de le faire automatiquement:
 ```
-dga# sed s/%%%%%%%%%%/`fti.lua fti/abcdefg`/ /etc/config/network
+dga# sed -i s/%%%%%%%%%%/`fti.lua fti/abcdefg`/ /etc/config/network
 ```
 
 Pour ceux qui, comme moi, n'aiment pas copier des fichiers sans trop savoir, voici les blocs intéressants à modifier:
