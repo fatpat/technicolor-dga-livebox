@@ -102,7 +102,7 @@ config interface 'wan'
                                        # sinon ca désactive ipv6 sur l'interface ptm0.832 via net.ipv6.conf.ptm0.832.disable_ipv6=1
 
 config config 'config'
-	option wan_mode 'dhcp'             # pas sur que ce soit indispensable, au cas ou
+	option wan_mode 'dhcp'             # afin que la GUI sache où récupérer les informations d'adresses IP
 
 config interface 'wan6'
 	option ifname '@wan'
